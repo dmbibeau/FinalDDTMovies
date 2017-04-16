@@ -94,7 +94,15 @@ import javafx.scene.layout.AnchorPane;
 		primaryStage.setTitle("Add Movie Menu");
 		primaryStage.show();
 	}
-	
+	public static void showSchedualGUI() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("../GUIs/SchedualGUI.fxml"));
+		mainLayout = loader.load();
+		Scene scene = new Scene(mainLayout);
+		primaryStage.setScene(scene);
+		Main.primaryStage.setTitle("Schedule");
+		primaryStage.show();
+	}
 	public static void showFindMovieMenu() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("../GUIs/FindMovieGUI.fxml")); 

@@ -15,6 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -22,8 +24,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class FindEmployeeController {
+	private static Stage primaryStage;
+	private static AnchorPane mainLayout;
 
 	ObservableList<String> selectionList = FXCollections.observableArrayList("Select", "Add Customer", "Find Customer", "Add Employee", "Find Employee", "Add Movie", "Find Movie");
 	@FXML
@@ -80,18 +86,26 @@ public class FindEmployeeController {
     
     @FXML
     void scheduleButton(ActionEvent event) throws SQLException {
-		ResultSet rs2 = UserClass.getPosition();
+		try {ResultSet rs2 = UserClass.getPosition();
 		rs2.next();
 		String currPosition = rs2.getString("position");
 		System.out.println("Schedule!" + currPosition);
 		if (currPosition.compareTo("Manager")==0) {
+			
 			accessLabel.setText("ACCESS GRANTED");
 			System.out.println("Manager");
+			
+			Main.showSchedualGUI();
+			
 		}
 		if (currPosition.compareTo("Employee")==0) {
 			accessLabel.setText("ACCESS DENIED");
 			System.out.println("Employee");
 		}
+		} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 //		System.out.println(rs2.getString("position"));
 //		currUser.setText(rs2.getString("position"));
 
