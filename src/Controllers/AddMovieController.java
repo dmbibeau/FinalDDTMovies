@@ -30,7 +30,13 @@ public class AddMovieController {
 
 	@FXML
 	private TextField Title;
-
+	
+	@FXML
+	private TextField quantity;
+	
+	@FXML
+	private TextField price;
+	
 	@FXML
 	private TextField Director;
 
@@ -100,7 +106,8 @@ public class AddMovieController {
 
 		if (Title.getText().isEmpty() || Director.getText().isEmpty() || Genre.getText().isEmpty()
 				|| Actors.getText().isEmpty() || Year.getText().isEmpty() || Format.getText().isEmpty()
-				|| Barcode.getText().isEmpty() || Language.getText().isEmpty()) {
+				|| Barcode.getText().isEmpty() || Language.getText().isEmpty() 
+				|| price.getText().isEmpty() || quantity.getText().isEmpty()) {
 			flag = false;
 		}
 		if(Title.getText().matches(".*\\d.*")){
@@ -131,10 +138,19 @@ public class AddMovieController {
 			langError.setText("letters only");
 			flag = false;
 		}
+		if(!price.getText().matches(".*\\d.*")){
+			//langError.setText("Numbers Only");
+			flag = false;
+		}
+		if(!quantity.getText().matches(".*\\d.*")){
+			//langError.setText("Numbers Only");
+			flag = false;
+		}
+		
 		if(flag){
 		
 		   
-		Movie.addMovie(Barcode, Title, Director, Genre, Actors, Year, Format, Language);
+		Movie.addMovie(Barcode, Title, Director, Genre, Actors, Year, Format, Language, price, quantity);
 		added.setText("movie added");
 		}
 		}

@@ -31,53 +31,61 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FindCustomerController { 
-	
-	ObservableList<String> selectionList = FXCollections.observableArrayList("Select", "Add Customer", "Find Customer", "Add Employee", "Find Employee", "Add Movie", "Find Movie");
+public class FindCustomerController {
+
+	ObservableList<String> selectionList = FXCollections.observableArrayList("Select", "Add Customer", "Find Customer",
+			"Add Employee", "Find Employee", "Add Movie", "Find Movie");
 	@FXML
 	private ChoiceBox<String> selectionBox;
 
 	@FXML
-    private TextField ID;
+	private TextField ID;
 
-    @FXML
-    private Button findCust;
-    
-    @FXML
-    private TableView<Person> table;
-
-    @FXML
-    private TableColumn<Person, String> first;
-
-    @FXML
-    private TableColumn<Person, String> last;
-
-    @FXML
-    private TableColumn<Person, Integer> pin;
-
-    @FXML
-    private TableColumn<Person, String> address;
-
-    @FXML
-    private TableColumn<Person, String> phone;
-    
-    @FXML
-    private Button removeCust;
-	
-    @FXML
-    void removeCust(ActionEvent event) throws Exception{
-    	ObservableList<Person> customerSelected, allCustomers;
-    	allCustomers = table.getItems();
-    	customerSelected = table.getSelectionModel().getSelectedItems();
-    	
-    	Database.removeCust(customerSelected.get(0).getPin());    	
-    	customerSelected.forEach(allCustomers::remove);
-    }
 	@FXML
-    void submitEntry(ActionEvent event) throws Exception{
+	private Button findCust;
+
+	@FXML
+	private TableView<Person> table;
+
+	@FXML
+	private TableColumn<Person, String> first;
+
+	@FXML
+	private TableColumn<Person, String> last;
+
+	@FXML
+	private TableColumn<Person, Integer> pin;
+
+	@FXML
+	private TableColumn<Person, String> address;
+
+	@FXML
+	private TableColumn<Person, String> phone;
+
+	@FXML
+	private Button removeCust;
+
+	@FXML
+	void removeCust(ActionEvent event) throws Exception {
+		ObservableList<Person> customerSelected, allCustomers;
+		allCustomers = table.getItems();
+		customerSelected = table.getSelectionModel().getSelectedItems();
+
+		Database.removeCust(customerSelected.get(0).getPin());
+		customerSelected.forEach(allCustomers::remove);
+	}
+	@FXML
+	void transaction(ActionEvent event) throws Exception {
+		
+		Main.showTransaction();
+		
+	}
+
+	@FXML
+	void submitEntry(ActionEvent event) throws Exception {
 		CustomerDB customernew = new CustomerDB();
 		int id = Integer.parseInt(ID.getText());
-		
+
 		ObservableList<Person> custout = customernew.findInfo(id);
 		first.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
 		last.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
@@ -86,31 +94,44 @@ public class FindCustomerController {
 		phone.setCellValueFactory(new PropertyValueFactory<Person, String>("phoneNum"));
 		table.setItems(custout);
 	}
-	
+
 	@FXML
 	private void initialize() {
 		selectionBox.setItems(selectionList);
-		
-		//Listen for selection changes
-		selectionBox.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+
+		// Listen for selection changes
+		selectionBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
 			try {
 				selectNext(newValue);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} );
+		});
 	}
-	
+
 	private void selectNext(Object selection) throws IOException {
-			String selectionString = selection.toString();
-			switch (selectionString) {
-			case "Add Customer" 	: Main.showAddCustMenu(); break;
-			case "Find Customer" 	: Main.showFindCustMenu(); break;
-			case "Add Employee" 	: Main.showAddEmpMenu(); break;
-			case "Find Employee" 	: Main.showFindEmpMenu(); break;
-			case "Add Movie" 			: Main.showAddMovieMenu(); break;
-			case "Find Movie" 		: Main.showFindMovieMenu(); break;
-			default : System.out.println("Error! Unknown selection!");
-			}
+		String selectionString = selection.toString();
+		switch (selectionString) {
+		case "Add Customer":
+			Main.showAddCustMenu();
+			break;
+		case "Find Customer":
+			Main.showFindCustMenu();
+			break;
+		case "Add Employee":
+			Main.showAddEmpMenu();
+			break;
+		case "Find Employee":
+			Main.showFindEmpMenu();
+			break;
+		case "Add Movie":
+			Main.showAddMovieMenu();
+			break;
+		case "Find Movie":
+			Main.showFindMovieMenu();
+			break;
+		default:
+			System.out.println("Error! Unknown selection!");
+		}
 	}
 }

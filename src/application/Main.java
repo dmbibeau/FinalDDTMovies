@@ -45,6 +45,16 @@ import javafx.scene.layout.AnchorPane;
 		primaryStage.show();
 	}
 	
+	public static void showTransaction() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("../GUIs/TransactionGUI.fxml"));
+		mainLayout = loader.load();
+		Scene scene = new Scene(mainLayout);
+		primaryStage.setScene(scene);
+		Main.primaryStage.setTitle("Transaction");
+		primaryStage.show();
+	}
+	
 	public static void showAddCustMenu() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("../GUIs/AddCustomerGUI.fxml"));
@@ -111,13 +121,13 @@ import javafx.scene.layout.AnchorPane;
 		 * database called ddt_movies*/
 		Database.createCustTable();
 		/* The following line will add a line to the table customer. */
-		Database.postCust();
+		//Database.postCust();
 		/* The following line will create a table called employee
 		 * if the table isn't already created. But you NEED a 
 		 * database called ddt_movies*/
 		EmployeeDB.createEmpTable();
 		/* The following line will add a line to the table customer. */
-		//EmployeeDB.postEmp();
+		EmployeeDB.postEmp();
 		//The following line of code will add the movie table. 
 		Database.createMovieTable();
 		/*The following line will create a table called transaction
