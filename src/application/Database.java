@@ -10,7 +10,7 @@ package application;
  
  import javafx.collections.FXCollections;  import javafx.collections.ObservableList; 
  import javafx.scene.control.TableView; 
- import javafx.scene.control.TextField; 
+  
  
  
  //import Controllers.User; 
@@ -24,9 +24,8 @@ package application;
  
  
  	private static String MYSQL_DRIVER= "com.mysql.jdbc.Driver"; 
- 	private static String MYSQL_URL="jdbc:mysql://localhost:3306/ddt_movies?autoReconnect=true&useSSL=false"; 
- 	//private String user ="root"; 
- 	//private String password="God0fmadnes$"; 
+ 	private static String MYSQL_URL="jdbc:mysql://localhost:3306/ddt_movies?autoReconnect=true&useSSL=false";  
+ //	private static String password="god0fmadnes$"; 
  	private static String user ="root"; 
  	//private static String password="Pass!@#$"; 
  	private static String password="Marie@21"; 
@@ -164,7 +163,8 @@ package application;
  			PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS transaction(" 
  				+ "code int (255) NOT NULL AUTO_INCREMENT, " 
  				+ "pin int(4), " 
- 				+ "barcode int (12), " 
+ 				+ "barcode int (12), "
+ 				+ "price decimal (10,2), "
  				+ "rent_date date, " 
  				+ "return_date date, " 
  				+ "PRIMARY KEY(code))"); 
@@ -226,6 +226,7 @@ package application;
  	} 
  } 
  
+
 
 
 

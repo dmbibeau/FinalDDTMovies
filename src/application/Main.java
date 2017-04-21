@@ -112,7 +112,16 @@ import javafx.scene.layout.AnchorPane;
 		primaryStage.setTitle("Find Movie Menu");
 		primaryStage.show();
 	 } 
-	
+	public static void showTransaction() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("../GUIs/TransactionGUI.fxml"));
+		mainLayout = loader.load();
+		Scene scene = new Scene(mainLayout);
+		primaryStage.setScene(scene);
+		Main.primaryStage.setTitle("Transaction");
+		primaryStage.show();
+	}
+
 	public static void main(String[] args) throws Exception {
 		/* The following line will create a table called customer 
 		 * if the table isn't already created. But you NEED a 
